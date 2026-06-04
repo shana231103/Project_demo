@@ -1,3 +1,8 @@
+"""
+Infrastructure Layer - Database Connection Pool
+Quản lý kết nối Postgres với ThreadedConnectionPool.
+"""
+
 import psycopg2
 from psycopg2.pool import ThreadedConnectionPool
 from psycopg2.extras import RealDictCursor
@@ -10,7 +15,6 @@ DB_USER = "postgres"
 DB_PASSWORD = "lolmht2003"
 DB_NAME = "demo"
 
-# Min connection = 1, max = 20
 db_pool = ThreadedConnectionPool(
     minconn=1,
     maxconn=20,
@@ -19,8 +23,9 @@ db_pool = ThreadedConnectionPool(
     user=DB_USER,
     password=DB_PASSWORD,
     database=DB_NAME,
-    cursor_factory=RealDictCursor
+    cursor_factory=RealDictCursor,
 )
+
 
 @contextmanager
 def get_db():
@@ -30,10 +35,10 @@ def get_db():
         conn = db_pool.getconn()
         cursor = conn.cursor()
         yield cursor
-        conn.commit() 
+        conn.commit()
     except Exception as e:
         if conn:
-            conn.rollback() 
+            conn.rollback()
         print(f"Database error: {e}")
         raise HTTPException(status_code=500, detail="Database error occurred")
     finally:

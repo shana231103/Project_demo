@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    background-color: #08090a;
+    color: #e8eaed;
+    font-family: "DM Sans", sans-serif;
+  }
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f1012;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3a3d42;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .animate-slide-up-1 { animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+  .animate-slide-up-2 { animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.10s both; }
+  .animate-slide-up-3 { animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
+  .animate-slide-up-4 { animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.20s both; }
+}
