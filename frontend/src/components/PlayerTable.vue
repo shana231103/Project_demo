@@ -1,20 +1,18 @@
 <template>
-  <div class="w-full overflow-x-auto rounded-2xl border border-ink-700">
+  <div class="w-full overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
 
     <!-- Table header -->
     <table class="w-full text-sm">
       <thead>
-        <tr class="border-b border-ink-700">
-          <th class="text-left px-5 py-4 font-display font-semibold text-xs uppercase
-                     tracking-widest text-ink-600 w-8">#</th>
-          <th class="text-left px-5 py-4 font-display font-semibold text-xs uppercase
-                     tracking-widest text-ink-600">Người chơi</th>
-          <th class="text-left px-5 py-4 font-display font-semibold text-xs uppercase
-                     tracking-widest text-ink-600">Đội</th>
-          <th class="text-right px-5 py-4 font-display font-semibold text-xs uppercase
-                     tracking-widest text-ink-600">KDA</th>
-          <th class="text-center px-5 py-4 font-display font-semibold text-xs uppercase
-                     tracking-widest text-ink-600">Tier</th>
+        <tr class="border-b border-slate-200 bg-slate-50/50">
+          <th class="text-left px-5 py-4 font-mono font-semibold text-sm uppercase
+                     tracking-widest text-slate-400 w-8">#</th>
+          <th class="text-left px-5 py-4 font-mono font-semibold text-sm uppercase
+                     tracking-widest text-slate-400">Player</th>
+          <th class="text-left px-5 py-4 font-mono font-semibold text-sm uppercase
+                     tracking-widest text-slate-400">Team</th>
+          <th class="text-right px-5 py-4 font-mono font-semibold text-sm uppercase
+                     tracking-widest text-slate-400">KDA</th>
         </tr>
       </thead>
 
@@ -22,9 +20,9 @@
         <!-- Skeleton rows -->
         <template v-if="loading">
           <tr v-for="i in 6" :key="`sk-${i}`"
-              class="border-b border-ink-800/60">
-            <td class="px-5 py-4" colspan="5">
-              <div class="h-5 rounded-md bg-gradient-to-r from-ink-800 via-ink-700 to-ink-800
+              class="border-b border-slate-100">
+            <td class="px-5 py-4" colspan="4">
+              <div class="h-5 rounded-md bg-gradient-to-r from-slate-100 via-slate-200/50 to-slate-100
                           bg-[length:200%_100%] animate-shimmer" />
             </td>
           </tr>
@@ -32,9 +30,9 @@
 
         <!-- Empty state -->
         <tr v-else-if="players.length === 0">
-          <td colspan="5" class="px-5 py-16 text-center">
+          <td colspan="4" class="px-5 py-16 text-center">
             <p class="text-4xl mb-3">🔍</p>
-            <p class="text-ink-600 font-body">Không tìm thấy người chơi nào.</p>
+            <p class="text-slate-400 font-body">Không tìm thấy người chơi nào.</p>
           </td>
         </tr>
 
@@ -43,13 +41,13 @@
           <tr
             v-for="(player, idx) in players"
             :key="player.name"
-            class="border-b border-ink-800/60 hover:bg-ink-800/50 transition-colors duration-150
+            class="border-b border-slate-100 hover:bg-slate-50/70 transition-colors duration-150
                    group cursor-default"
             :style="{ animationDelay: `${idx * 40}ms` }"
             :class="idx < 8 ? `animate-slide-up-${Math.min(idx + 1, 4)}` : 'animate-fade-in'"
           >
             <!-- Rank -->
-            <td class="px-5 py-4 font-mono text-xs text-ink-600">
+            <td class="px-5 py-4 font-mono text-xs text-slate-400">
               {{ String(idx + 1).padStart(2, "0") }}
             </td>
 
@@ -59,19 +57,19 @@
                 <!-- Avatar initials -->
                 <div
                   class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0
-                         font-display font-bold text-xs text-ink-950 select-none"
+                         font-bold text-xs text-slate-800 select-none shadow-sm"
                   :style="{ background: avatarColor(player.name) }"
                 >
                   {{ initials(player.name) }}
                 </div>
-                <span class="font-body font-medium text-white">{{ player.name }}</span>
+                <span class="font-body font-medium text-slate-800">{{ player.name }}</span>
               </div>
             </td>
 
             <!-- Team -->
             <td class="px-5 py-4">
-              <span class="font-body text-ink-500 text-xs bg-ink-800 px-2 py-1 rounded-lg
-                           border border-ink-700">
+              <span class="font-body text-slate-500 text-xs bg-slate-100 px-2.5 py-1 rounded-lg
+                           border border-slate-200">
                 {{ player.team }}
               </span>
             </td>
@@ -85,11 +83,6 @@
                 {{ player.kda.toFixed(2) }}
               </span>
             </td>
-
-            <!-- Tier -->
-            <td class="px-5 py-4 text-center">
-              <TierBadge :tier="player.performance_tier ?? 'Bronze'" />
-            </td>
           </tr>
         </template>
       </tbody>
@@ -97,13 +90,13 @@
 
     <!-- Footer count -->
     <div v-if="!loading && players.length > 0"
-         class="px-5 py-3 border-t border-ink-800 flex justify-between items-center">
-      <span class="text-xs text-ink-600 font-body">
-        {{ players.length }} người chơi
+         class="px-5 py-3.5 border-t border-slate-200 flex justify-between items-center bg-slate-50/30">
+      <span class="text-sm text-slate-400 font-body">
+        {{ players.length }} player
       </span>
-      <span class="text-xs text-ink-600 font-mono">
-        avg KDA:
-        <span class="text-acid font-semibold">{{ avgKda }}</span>
+      <span class="text-xs text-slate-500 font-mono">
+        Average Players KDA:
+        <span class="font-semibold ml-1">{{ avgKda }}</span>
       </span>
     </div>
   </div>
@@ -111,7 +104,6 @@
 
 <script setup>
 import { computed } from "vue";
-import TierBadge from "./TierBadge.vue";
 
 const props = defineProps({
   players: { type: Array, default: () => [] },
@@ -123,9 +115,10 @@ function initials(name) {
 }
 
 function avatarColor(name) {
+  // A palette of lighter, softer pastel colors for light theme avatar backgrounds
   const colors = [
-    "#c8f53b", "#a0c8ff", "#ff4d2b", "#f0c030",
-    "#80e0c0", "#d090f0", "#f080a0",
+    "#dbeafe", "#fee2e2", "#fef3c7", "#d1fae5",
+    "#f3e8ff", "#fae8ff", "#ffedd5",
   ];
   let h = 0;
   for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) & 0xffffffff;
@@ -133,10 +126,10 @@ function avatarColor(name) {
 }
 
 function kdaColor(kda) {
-  if (kda >= 5) return "text-amber-300";
-  if (kda >= 3) return "text-acid";
-  if (kda >= 2) return "text-white";
-  return "text-ink-500";
+  if (kda >= 5) return "text-amber-600";
+  if (kda >= 3) return "text-emerald-600";
+  if (kda >= 2) return "text-slate-700";
+  return "text-slate-400";
 }
 
 const avgKda = computed(() => {

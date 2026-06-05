@@ -4,13 +4,13 @@
     <div
       class="flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-200"
       :class="focused
-        ? 'border-acid bg-ink-800 shadow-[0_0_0_3px_rgba(200,245,59,0.12)]'
-        : 'border-ink-600 bg-ink-800 hover:border-ink-500'"
+        ? 'border-blue-500 bg-white shadow-[0_0_0_3px_rgba(37,99,235,0.12)]'
+        : 'border-slate-200 bg-white hover:border-slate-300'"
     >
       <!-- Search icon -->
       <svg
         class="w-4 h-4 shrink-0 transition-colors duration-200"
-        :class="focused ? 'text-acid' : 'text-ink-600'"
+        :class="focused ? 'text-blue-500' : 'text-slate-400'"
         viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"
       >
         <circle cx="9" cy="9" r="6" />
@@ -22,8 +22,8 @@
         v-model="query"
         type="text"
         placeholder="Tìm kiếm tên người chơi…"
-        class="flex-1 bg-transparent text-sm font-body text-white placeholder-ink-600
-               outline-none caret-acid"
+        class="flex-1 bg-transparent text-sm font-body text-slate-800 placeholder-slate-400
+               outline-none caret-blue-500"
         @focus="focused = true"
         @blur="focused = false"
         @keydown.enter="emit('search', query)"
@@ -34,10 +34,10 @@
       <button
         v-if="query"
         @click="clear"
-        class="shrink-0 w-5 h-5 rounded-full bg-ink-600 hover:bg-ink-500 flex items-center
+        class="shrink-0 w-5 h-5 rounded-full bg-slate-200 hover:bg-slate-300 flex items-center
                justify-center transition-colors duration-150"
       >
-        <svg viewBox="0 0 12 12" class="w-2.5 h-2.5 text-white" fill="none"
+        <svg viewBox="0 0 12 12" class="w-2.5 h-2.5 text-slate-600" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <path d="M2 2l8 8M10 2l-8 8" />
         </svg>
@@ -45,8 +45,8 @@
     </div>
 
     <!-- Hint -->
-    <p class="mt-1.5 text-xs text-ink-600 font-body pl-1">
-      Nhấn <kbd class="px-1 py-0.5 rounded bg-ink-700 text-ink-500 font-mono text-[10px]">Enter</kbd>
+    <p class="mt-1.5 text-xs text-black font-body pl-1">
+      Nhấn <kbd class="px-1 py-0.5 rounded bg-slate-200 text-slate-500 font-mono text-[10px]">Enter</kbd>
       để tìm kiếm
     </p>
   </div>

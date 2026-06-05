@@ -1,16 +1,16 @@
 <template>
-  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
     <div
       v-for="(card, i) in cards"
       :key="card.label"
-      class="rounded-xl border border-ink-700 bg-ink-800/60 px-4 py-4
-             flex flex-col gap-1 animate-slide-up"
+      class="rounded-xl border border-slate-200 bg-white px-5 py-4
+             flex flex-col gap-1 shadow-sm hover:shadow transition-shadow duration-200 animate-slide-up"
       :style="{ animationDelay: `${i * 60}ms` }"
     >
-      <span class="text-xs font-display uppercase tracking-widest text-ink-600">
+      <span class="text-xs uppercase tracking-widest text-black font-mono">
         {{ card.label }}
       </span>
-      <span class="text-2xl font-display font-bold" :class="card.color">
+      <span class="text-2xl font-bold" :class="card.color">
         {{ card.value }}
       </span>
     </div>
@@ -27,21 +27,18 @@ const props = defineProps({
 const cards = computed(() => {
   const p = props.players;
   if (!p.length) return [
-    { label: "Tổng", value: "—", color: "text-white" },
-    { label: "KDA TB", value: "—", color: "text-acid" },
-    { label: "KDA Cao", value: "—", color: "text-amber-300" },
-    { label: "Legend", value: "—", color: "text-frost" },
+    { label: "Total Players", value: "—", color: "text-slate-800" },
+    { label: "Average KDA", value: "—", color: "text-blue-600" },
+    { label: "Max KDA", value: "—", color: "text-amber-600" },
   ];
 
   const avg = p.reduce((a, x) => a + x.kda, 0) / p.length;
   const max = Math.max(...p.map((x) => x.kda));
-  const legends = p.filter((x) => (x.performance_tier ?? "") === "Legend").length;
 
   return [
-    { label: "Tổng", value: p.length, color: "text-white" },
-    { label: "KDA TB", value: avg.toFixed(2), color: "text-acid" },
-    { label: "KDA Cao", value: max.toFixed(2), color: "text-amber-300" },
-    { label: "Legend", value: legends, color: "text-frost" },
+    { label: "Total Players", value: p.length, color: "text-slate-800" },
+    { label: "Average KDA", value: avg.toFixed(2), color: "text-blue-600" },
+    { label: "Max KDA", value: max.toFixed(2), color: "text-amber-600" },
   ];
 });
 </script>

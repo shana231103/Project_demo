@@ -8,26 +8,41 @@
   * {
     box-sizing: border-box;
   }
+
   html {
-    background-color: #08090a;
-    color: #e8eaed;
+    background-color: #686c6d;
+    color: #0f172a;
     font-family: "DM Sans", sans-serif;
   }
+
   ::-webkit-scrollbar {
     width: 4px;
   }
+
   ::-webkit-scrollbar-track {
-    background: #0f1012;
+    background: #686c6d;
   }
+
   ::-webkit-scrollbar-thumb {
-    background: #3a3d42;
+    background: #cbd5e1;
     border-radius: 2px;
   }
 }
 
 @layer utilities {
-  .animate-slide-up-1 { animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
-  .animate-slide-up-2 { animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.10s both; }
-  .animate-slide-up-3 { animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
-  .animate-slide-up-4 { animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.20s both; }
+  .animate-slide-up-1 {
+    animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+  }
+
+  .animate-slide-up-2 {
+    animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both;
+  }
+
+  .animate-slide-up-3 {
+    animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  }
+
+  .animate-slide-up-4 {
+    animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.20s both;
+  }
 }
